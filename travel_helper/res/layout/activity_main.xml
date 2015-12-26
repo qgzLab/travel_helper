@@ -1,0 +1,99 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical" >
+
+   <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp" 
+        android:background="#5fd4ff">
+        
+        <TextView
+            android:id="@+id/main_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+	        android:layout_marginLeft="130dp"
+	        android:textColor="#FFFFFF"
+            android:text="驴友APP"
+            android:textAppearance="?android:attr/textAppearanceLarge" />    
+    </LinearLayout>
+    
+   <LinearLayout
+       android:layout_width="330dp"
+       android:layout_height="110dp"
+       android:layout_marginLeft="15dp"
+       android:layout_marginTop="20dp"
+       android:background="#FFFFFF">
+        
+       <Button
+        android:id="@+id/VIP"
+        android:layout_height="100dp"
+        android:layout_width="100dp"
+        android:background="@drawable/vip"/>
+       
+       <Button
+        android:id="@+id/think"
+        android:layout_height="100dp"
+        android:layout_width="100dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/think"/>
+       
+       <Button
+        android:id="@+id/org"
+        android:layout_height="100dp"
+        android:layout_width="100dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/org"/>
+
+    </LinearLayout>
+    
+   <LinearLayout
+        android:layout_width="330dp"
+        android:layout_height="110dp" 
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="15dp"
+        android:background="#FFFFFF">
+        
+       <Button
+        android:id="@+id/evaluate"
+        android:layout_height="100dp"
+        android:layout_width="100dp"
+        android:background="@drawable/evaluate"/>
+       
+       <Button
+        android:id="@+id/invi"
+        android:layout_height="100dp"
+        android:layout_width="100dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/diary"/>
+       
+       <Button
+        android:id="@+id/team"
+        android:layout_height="100dp"
+        android:layout_width="100dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/team"/>
+
+    </LinearLayout>
+    
+ <LinearLayout
+        android:layout_width="330dp"
+        android:layout_height="110dp" 
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="15dp"
+        android:background="#FFFFFF">
+        
+       <Button
+        android:id="@+id/more"
+        android:layout_height="100dp"
+        android:layout_width="100dp"
+        android:background="@drawable/more"/>
+       
+       
+
+    </LinearLayout>
+    
+    
+</LinearLayout>
