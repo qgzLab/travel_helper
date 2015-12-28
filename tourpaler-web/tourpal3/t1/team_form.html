@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>创建团队</title>
+<link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="/static/js/jquery.min.js"></script>
+<!-- Custom Theme files -->
+<!--theme-style-->
+<link href="/static/css/style.css" rel="stylesheet" type="text/css" media="all" />	
+<!--//theme-style-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--fonts-->
+<link href='http://fonts.useso.com/css?family=Lato:100,300,400,700,900' rel='stylesheet' type='text/css'>
+<!--//fonts-->
+<script type="text/javascript" src="/static/js/move-top.js"></script>
+<script type="text/javascript" src="/static/js/easing.js"></script>
+				<script type="text/javascript">
+					jQuery(document).ready(function($) {
+						$(".scroll").click(function(event){		
+							event.preventDefault();
+							$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+						});
+					});
+					</script>
+<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+<script src="/static/js/sitedata_bas.js" language="javascript"></script>
+<script src="/static/js/headimg.js" language="javascript"></script>
+</head>
+<body><center>
+
+	<!--header-->
+	<div class="container">
+	<div class="header">
+		<div class="header-top">
+			<div class="logo">
+				<a href="/home/"><img src="/static/images/logo.png" alt="" ></a>
+			</div>
+
+			
+			<div class="header-top-on">
+				{% if logined %}
+				<div class="head_img">
+					<a href="/information/change_img/"><img src = '/static/{{User.Img}}/' onload = "DrawImage(this)"></a>
+				</div>
+				<p>welcome,{{User.Username}}</p>
+				<p><a href='/loginout/'>退出登录</a></p>
+				{% else %}
+				<p><a href="/login/">登录</a>/<a href="/register/">注册</a></p>
+				{% endif %}
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+		<!---->
+		<div class="header-bottom">
+			<div class="top-nav">
+				<span class="menu"> </span>
+				<ul>
+					<li><a href="/home/" data-hover="首页">首页  </a> </li>
+					<li><a href="/strategy/" data-hover="攻略" > 攻略</a></li>
+					
+					<li><a href="/diary/" data-hover="日志"> 日志</a></li>
+					<li  ><a href="/team/"  data-hover="我的团队">我的团队 </a></li>
+					<li><a href="/information/" data-hover="个人资料">个人资料 </a></li>	
+					<li class="active"><a href="/aim/">旅游意向 </a></li>
+				</ul>
+				<!--script-->
+				<script>
+				$("span.menu").click(function(){
+					$(".top-nav ul").slideToggle(500, function(){
+					});
+				});
+				</script>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+	   </div>
+	</div>
+	</div>
+	<!---->
+	
+	<!build--->
+	<div class="container"><center>
+	   <div class="login">
+		<h2>组建团队</h2>
+		<div class="clearfix"></div>
+
+		<form role="form" method="POST">{% csrf_token %}
+			<input type = 'hidden' value ={{aim_id}} name = 'aim_id'>
+			<table width="564" border="0" cellpadding="0" cellspacing="0" class="left">
+			<tr>
+				<td style="text-align:right"><span>团队名称：</span></td>
+				<td><input type="text" id="teamname" name="name" placeholder=""></td>
+			</tr>
+			<tr>
+				<td style="text-align:right"><span>旅游景点：</span></td>
+				<td><input type="text" id="dest" name="dest" placeholder="">
+				</td>
+			</tr>
+			<tr>
+                    		<td style="text-align:right"><span>目的城市：</span></td>
+				<td>
+            				<select name="province"  id="region1">
+					</select>				    
+              				<select name="city"  id="region2">
+				        </select>
+					
+				</td>
+			</tr>
+			</table>
+			<div style="padding:10px 300px;"><input type="submit" value="下一步"></div>
+		</form>
+	</center></div>
+	<div class="container">
+		<div class="footer">
+			<p class="footer-class">本网站最终解释权归HIT-图灵机所有</p>
+		</div>
+	</div>	
+</center></body>
+</html>
+			
