@@ -1,0 +1,160 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>首页</title>
+<link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="/static/js/jquery.min.js"></script>
+<!-- Custom Theme files -->
+<!--theme-style-->
+<link href="/static/css/style.css" rel="stylesheet" type="text/css" media="all" />	
+<!--//theme-style-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Inspired Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--fonts-->
+<link href='http://fonts.useso.com/css?family=Lato:100,300,400,700,900' rel='stylesheet' type='text/css'>
+<!--//fonts-->
+<script type="text/javascript" src="/static/js/move-top.js"></script>
+<script type="text/javascript" src="/static/js/easing.js"></script>
+				<script type="text/javascript">
+					jQuery(document).ready(function($) {
+						$(".scroll").click(function(event){		
+							event.preventDefault();
+							$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+						});
+					});
+					</script>
+<script src="/static/js/headimg.js" language="javascript"></script>
+<script src="/static/js/textimg.js" language="javascript"></script>
+</head>
+<body>
+	<!--header-->
+	<div class="container">
+	<div class="header">
+		<div class="header-top">
+			<div class="logo">
+				<a href="/home/"><img src="/static/images/logo.png" alt="" ></a>
+			</div>
+
+			
+			<div class="header-top-on">
+				{% if logined %}
+				<div class="head_img">
+					<a href="/information/change_img/"><img src = '/static/{{User.Img}}/' onload = "DrawImage(this)"></a>
+				</div>
+				<p>welcome,{{User.Username}}</p>
+				<p><a href='/loginout/'>退出登录</a></p>
+				{% else %}
+				<p><a href="/login/">登录</a>/<a href="/register/">注册</a></p>
+				{% endif %}
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+		<!---->
+		<div class="header-bottom">
+			<div class="top-nav">
+				<span class="menu"> </span>
+				<ul>
+					<li class="active" ><a href="/home/" >首页  </a> </li>
+					<li><a href="/guide/" data-hover="攻略" > 攻略</a></li>
+					<li><a href="/diary/" data-hover="日志"> 日志</a></li>
+					<li><a href="/search/" data-hover="地图">地图 </a></li>
+					<li><a href="/team/" data-hover="我的团队">我的团队 </a></li>
+					<li><a href="/information/" data-hover="个人资料">个人资料 </a></li>	
+					<li><a href="/aim/" data-hover="旅游意向">旅游意向 </a></li>
+				</ul>
+				<!--script-->
+				<script>
+				$("span.menu").click(function(){
+					$(".top-nav ul").slideToggle(500, function(){
+					});
+				});
+				</script>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+	</div>
+	<!---->
+	<div class="container">
+		<div class="banner">
+		   <!--manage-->
+		   <div class="banner-top">
+			<div class="wmuSlider example1">
+				   <div class="wmuSliderWrapper">
+					   <article style="position: absolute; width: 100%; opacity: 0;">
+							<div class="banner-bottom">
+								<a href="#"><img class="img-responsive line-in" src="/static/images/banner.jpg" alt=""></a>
+								<div class="dummy-text">
+									<div class="doe">
+										<h6>哈尔滨圣索菲亚大教堂</h6>
+										<br>
+										<p>哈尔滨圣索菲亚教堂坐落在东北名城哈尔滨，始建于1907年3月，原为沙俄东西伯利亚第四步兵师修建中东铁路的随军教堂，全木结构，平面呈拉丁十字布局，是典型的拜占庭风格建筑</p>
+									</div>
+								</div>				
+								<div class="clearfix"> </div>
+							</div>
+					    </article>
+					    <article style="position: absolute; width: 100%; opacity: 0;">
+							<div class="banner-bottom">
+								<a href="#"><img class="img-responsive line-in" src="/static/images/banner1.jpg" alt=""/></a>
+								<div class="dummy-text">
+									<div class="doe">
+										<h6>安徽黄山</h6>
+										<br>
+										<p>黄山位于安徽省南部黄山市境内。原名黟山，因峰岩青黑，遥望苍黛而名。后因传说轩辕黄帝曾在此炼丹，故改名为“黄山”。明朝旅行家徐霞客登临黄山时，曾赞叹到：“薄海内外之名山，无如徽之黄山。登黄山，天下无山，观止矣！”被后人引申为“五岳归来不看山，黄山归来不看岳”。</p>
+									</div>
+								</div>				
+								<div class="clearfix"> </div>
+							</div>
+					    </article>
+						<article style="position: absolute; width: 100%; opacity: 0;">
+							<div class="banner-bottom">
+								<a href="#"><img class="img-responsive line-in" src="/static/images/banner2.jpg" alt=""/></a>
+								<div class="dummy-text">
+									<div class="doe">
+										<h6>厦门鼓浪屿</h6>
+										<br>
+										<p>鼓浪屿（英文：Kulangsu）位于福建厦门。因岛西南方海滩上有一块两米多高、中有洞穴的礁石，每当涨潮水涌，浪击礁石，声似擂鼓，人们称“鼓浪石”，鼓浪屿因此而得名。鼓浪屿街道短小，纵横交错，岛上岩石峥嵘，挺拔雄秀，且保留有许多中外风格各异的建筑物。</p>
+									</div>
+								</div>				
+								<div class="clearfix"> </div>
+							</div>
+					    </article>
+						<article style="position: absolute; width: 100%; opacity: 0;">
+							<div class="banner-bottom">
+								<a href="#"><img class="img-responsive line-in" src="/static/images/banner3.jpg"  alt=""/></a>
+								<div class="dummy-text">
+									<div class="doe">
+										<h6>承德避暑山庄</h6>
+										<br>
+										<p>承德避暑山庄位于河北省承德市市区北部，是中国古代帝王宫苑，清代皇帝避暑和处理政务的场所。始建于1703年，历经清康熙、雍正、乾隆三朝，耗时89年建成。与全国重点文物保护单位颐和园、拙政园、留园并称为中国四大名园。</p>
+									</div>
+								</div>				
+								<div class="clearfix"> </div>
+							</div>
+					    </article>
+				   </div>
+	               
+	            	</div>
+	            	<script src="/static/js/jquery.wmuSlider.js"></script>
+			<script>				
+			$('.example1').wmuSlider({
+				 pagination:false,
+			});         
+			</script> 	
+          	         
+		   </div>
+		</div>
+	</div>
+	<!---->
+	<div class="container">
+		<div class="footer">
+			<p class="footer-class">本网站最终解释权归HIT-图灵机所有</p>
+		</div>
+	</div>		
+</body>
+</html>

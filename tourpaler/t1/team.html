@@ -1,0 +1,226 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>我的团队</title>
+<link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="/static/js/jquery.min.js"></script>
+<!-- Custom Theme files -->
+<!--theme-style-->
+<link href="/static/css/style.css" rel="stylesheet" type="text/css" media="all" />	
+<!--//theme-style-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--fonts-->
+<link href='http://fonts.useso.com/css?family=Lato:100,300,400,700,900' rel='stylesheet' type='text/css'>
+<!--//fonts-->
+<script type="text/javascript" src="/static/js/move-top.js"></script>
+<script type="text/javascript" src="/static/js/easing.js"></script>
+				<script type="text/javascript">
+					jQuery(document).ready(function($) {
+						$(".scroll").click(function(event){		
+							event.preventDefault();
+							$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+						});
+					});
+					</script>
+<script src="/static/js/headimg.js" language="javascript"></script>
+</head>
+<body><center>
+	<!--header-->
+	<div class="container">
+	<div class="header">
+		<div class="header-top">
+			<div class="logo">
+				<a href="/home/"><img src="/static/images/logo.png" alt="" ></a>
+			</div>
+
+			
+			<div class="header-top-on">
+				{% if logined %}
+				<div class="head_img">
+					<a href="/information/change_img/"><img src = '/static/{{User.Img}}/' onload = "DrawImage(this)"></a>
+				</div>
+				<p>welcome,{{User.Username}}</p>
+				<p><a href='/loginout/'>退出登录</a></p>
+				{% else %}
+				<p><a href="/login/">登录</a>/<a href="/register/">注册</a></p>
+				{% endif %}
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+		<!---->
+		<div class="header-bottom">
+			<div class="top-nav">
+				<span class="menu"> </span>
+				<ul>
+					<li><a href="/home/" data-hover="首页">首页  </a> </li>
+					<li><a href="/guide/" data-hover="攻略" > 攻略</a></li>
+					<li><a href="/diary/" data-hover="日志"> 日志</a></li>
+					<li class="active" ><a href="/team/" >我的团队 </a></li>
+					<li><a href="/information/" data-hover="个人资料">个人资料 </a></li>
+					<li><a href="/aim/"  data-hover="旅游意向">旅游意向 </a></li>								</ul>
+				<!--script-->
+				<script>
+				$("span.menu").click(function(){
+					$(".top-nav ul").slideToggle(500, function(){
+					});
+				});
+				</script>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+	</div>
+	<!---->
+	<div class="container">
+		<div class="change_btn">
+			<div style="position:absolute;right:150px;">
+				<a href="/aim/"><button type="button" class="btn btn-primary">组建团队</button></a>
+                <a href="/team/find/"><button type="button" class="btn btn-primary">查找团队</button></a>
+			</div>
+			<div class="detail_inf">
+			{% if teams %}<!--自己管理的团队 -->
+				<h3><font color="0000ee">您管理的团队</font></h3>
+			   {% for team in teams %}
+			   <div class="team_inf">
+					<table>
+					<h4>{{team.Team_name}}</h4>
+					<h5>目的地：{{team.Team_province}}-{{team.Team_city}}</h5>
+					<br>
+					<tr>
+						<td>用户名&nbsp&nbsp</td><td>性别&nbsp&nbsp</td><td>QQ&nbsp&nbsp</td><td>所在地&nbsp&nbsp</td><td>状态&nbsp&nbsp</td><td>操作1&nbsp&nbsp</td><td>操作2&nbsp&nbsp</td>
+                    <tr>
+                 
+                    </tr>
+                    <tr>
+						<td>{{team.Leader.Username}}&nbsp&nbsp</td><td>{{team.Leader.Sex}}&nbsp&nbsp</td><td>{{team.Leader.Qq}}&nbsp&nbsp</td><td>{{team.Leader.Live_province}}-{{team.Leader.Live_city}}&nbsp&nbsp</td><td>队长&nbsp&nbsp</td>
+					</tr>
+					</tr>
+                    <tr>
+                    
+                    </tr>
+					{% for User in team.User0.all %}
+					<tr>
+						<td>{{User.Username}}&nbsp&nbsp</td><td>{{User.Sex}}&nbsp&nbsp</td><td>{{User.Qq}}&nbsp&nbsp</td><td>{{User.Live_province}}-{{User.Live_city}}&nbsp&nbsp</td><td><font color="0000ee">已审核</font></td>
+					</tr>
+					{% endfor %}
+                    <tr>
+                    
+                    </tr>
+                    {% for User in team.User1.all %}
+					<tr>
+						<td>{{User.Username}}&nbsp&nbsp</td><td>{{User.Sex}}&nbsp&nbsp</td><td>{{User.Qq}}&nbsp&nbsp</td><td>{{User.Live_province}}-{{User.Live_city}}&nbsp&nbsp</td><td><font color="ff0000">待审核</font></td>
+					</tr>
+                    {% endfor %}
+                    <tr>
+                    
+                    </tr>
+                    {% for User in team.User2.all %}
+					<tr>
+						<td>{{User.Username}}&nbsp&nbsp</td><td>{{User.Sex}}&nbsp&nbsp</td><td>{{User.Qq}}&nbsp&nbsp</td><td>{{User.Live_province}}-{{User.Live_city}}&nbsp&nbsp</td><td><font color="ff0000">待审核</font></td>
+                        <td><a href = '/user/check/{{User.id}}/{{team.id}}/0/'>同意申请</a></td>
+						<td><a href = '/user/check/{{User.id}}/{{team.id}}/1/'>拒绝申请</a></td>
+					</tr>
+					{% endfor %}
+					</table>
+					<div style="position:absolute;right:700px;">
+						<a href="/team/del/{{team.id}}/"><button type="button" class="btn btn-primary">删除队伍</button></a>
+                    </div>
+					<div style="position:absolute;right:600px;">
+						<a href="/user/find/{{team.id}}"><button type="button" class="btn btn-primary">邀请队友</button></a>
+					</div>
+				</div>
+                {% endfor %}
+			{% endif %}            
+			</div>
+            
+            <div class="detail_inf">
+			{% if team0 %}<!-- 自己所在的团队 -->
+                <h3><font color="0000ee">自己所在的团队</font></h3>
+			
+
+			   {% for team in team0 %}
+			   <div class="team_inf">
+					<table>
+					<h4>{{team.Team_name}}</h4>
+					<h5>目的地：{{team.Team_dest}}</h5>
+					<br>
+					<tr>
+						<td>用户名&nbsp&nbsp</td><td>性别&nbsp&nbsp</td><td>QQ&nbsp&nbsp</td><td>所在地&nbsp&nbsp</td><td></td>
+					</tr>
+                   
+                    <tr>
+						<td>{{team.Leader.Username}}&nbsp&nbsp</td><td>{{team.Leader.Sex}}&nbsp&nbsp</td><td>{{team.Leader.Qq}}&nbsp&nbsp</td><td>{{team.Leader.Live_province}}-{{team.Leader.Live_city}}&nbsp&nbsp</td><td><font color="0000ee">队长</font></td>
+					</tr>
+                   
+					{% for User in team.User0.all %}
+					<tr>
+						<td>{{User.Username}}&nbsp&nbsp</td><td>{{User.Sex}}&nbsp&nbsp</td><td>{{User.Qq}}&nbsp&nbsp</td><td>{{User.Live_province}}-{{User.Live_city}}&nbsp&nbsp</td>
+					</tr>
+					{% endfor %}
+					</table>
+					<div style="position:absolute;right:700px;">
+						<a href="/team/del/{{team.id}}/"><button type="button" class="btn btn-primary">退出队伍</button></a>
+                    </div>
+					<div style="position:absolute;right:600px;">
+						<a href="/user/find/{{team.id}}"><button type="button" class="btn btn-primary">邀请队友</button></a>
+					</div>               
+				</div>
+			   {% endfor %}
+
+			{% endif %}
+            <div class="detail_inf">   
+			{% if team1 %}<!-- 邀请了自己的团队 -->
+				<h3><font color="0000ee">邀请了自己的团队</font></h3>
+            
+			   {% for team in team1 %}
+			   <div class="team_inf">
+					<table>
+					<tr>
+						<td>{{team.Team_name}}&nbsp&nbsp</td>
+						<td>
+						<a href = '/check/{{team.id}}/0/'>同意加入&nbsp</a>
+						</td>
+						<td>
+						<a href = '/check/{{team.id}}/1/'>拒绝加入&nbsp</a>
+						</td>
+                    </tr>
+					</table>
+				</div>
+			   {% endfor %}
+			{% endif %}
+            </div>
+            
+            <div class="detail_inf">    
+			 {% if team2 %}<!-- 自己申请的团队 -->
+				<h3><font color="0000ee">自己申请的团队</font></h3>
+           
+			   {% for team in team2 %}
+			   <div class="team_inf">
+					<table>
+					<tr>
+                    <td>{{team.Team_name}}</td>
+                    </tr>
+					</table>
+				</div>
+			   {% endfor %}
+			{% endif %}
+            
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="footer">
+			<p class="footer-class">本网站最终解释权归HIT-图灵机所有</p>
+		</div>
+	</div>	
+	
+	
+	
+
+					
+</center></body>
+</html>
+			

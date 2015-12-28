@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>日志撰写</title>
+<link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="/static/js/jquery.min.js"></script>
+<!-- Custom Theme files -->
+<!--theme-style-->
+<link href="/static/css/style.css" rel="stylesheet" type="text/css" media="all" />	
+<!--//theme-style-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--fonts-->
+<link href='http://fonts.useso.com/css?family=Lato:100,300,400,700,900' rel='stylesheet' type='text/css'>
+<!--//fonts-->
+<script type="text/javascript" src="/static/js/move-top.js"></script>
+<script type="text/javascript" src="/static/js/easing.js"></script>
+				<script type="text/javascript">
+					jQuery(document).ready(function($) {
+						$(".scroll").click(function(event){		
+							event.preventDefault();
+							$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+						});
+					});
+					</script>
+<script src="/static/js/sitedata_bas.js" language="javascript"></script>
+<script src="/static/js/headimg.js" language="javascript"></script>
+</head>
+<body>
+	<!--header-->
+	<div class="container">
+	<div class="header">
+		<div class="header-top">
+			<div class="logo">
+				<a href="/home/"><img src="/static/images/logo.png" alt="" ></a>
+			</div>
+
+			
+			<div class="header-top-on">
+				{% if logined %}
+				<div class="head_img">
+					<a href="/information/change_img/"><img src = '/static/{{User.Img}}/' onload = "DrawImage(this)"></a>
+				</div>
+				<p>welcome,{{User.Username}}</p>
+				<p><a href='/loginout/'>退出登录</a></p>
+				{% else %}
+				<p><a href="login.html">登录</a>/<a href="/register/">注册</a></p>
+				{% endif %}
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+		<!---->
+		<div class="header-bottom">
+			<div class="top-nav">
+				<span class="menu"> </span>
+				<ul>
+					<li><a href="/home/" data-hover="首页">首页  </a> </li>
+					<li><a href="/guide/" data-hover="攻略" > 攻略</a></li>
+					<li  class="active" ><a href="/diary/"> 日志</a></li>
+					<li><a href="/team/" data-hover="我的团队">我的团队 </a></li>
+					<li><a href="/information/" data-hover="个人资料">个人资料 </a></li>
+					<li><a href="/aim/" data-hover="旅游意向">旅游意向 </a></li>								</ul>
+				<!--script-->
+				<script>
+				$("span.menu").click(function(){
+					$(".top-nav ul").slideToggle(500, function(){
+					});
+				});
+				</script>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+	</div>
+	<!---->
+
+	<div class="container">
+		<div style="position:absolute;right:150px;margin:10px;">
+			<a href="/mydiary/"><button type="button" class="btn btn-primary">我的日志</button></a>
+		</div>
+		<div class="contact">
+			<div class="col-md-12 contact-para">
+				{% if empty %}
+				<p class="class-para">您的当前日志为空，写下你的所闻所感，与驴友们共享吧~</p>
+				{% else %}
+				<p class="class-para">写下你的所闻所感，与驴友们共享~</p>
+				{% endif %}
+				<h5>个人日志</h5>
+				<form action = '/diary/add/' method = 'post' enctype='multipart/form-data'>{% csrf_token %}
+					<div class="grid-contact">
+						<div class="col-md-4 contact-grid">
+							<p>标题</p>
+							<input type="text" name="title" style="background-image:url('/static/images/textback.jpg');/">
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+					<div class="grid-contact">
+						<div class="col-md-4 contact-grid">
+							<p>所在地</p>
+							<select name="region1"  id="region1">
+					</select>				    
+              				<select name="region2"  id="region2">
+				        </select>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+					<div class="grid-contact">
+						<div class="col-md-4 contact-grid">
+							<p>景点</p>
+							<input type="text" name="dest" style="background-image:url('/static/images/textback.jpg');/">
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+					<p class="your-para">MESSAGE</p>
+					<textarea name="text" cols="77" rows="6" value=" " style="background-image:url('/static/images/textback.jpg');/"></textarea>
+                    <div>
+                    <input type = 'file' name = 'pic'>
+                    </div>
+					<div class="grid-contact">
+						<div class="col-md-2 contact-grid">
+							发表为：<label><input type="checkbox" value="1" name="choose">日志</lable>
+						</div>
+						<div class="col-md-2 contact-grid">
+							<label><input type="checkbox" value="2" name="choose">攻略</lable>
+						</div>
+					</div>
+					<div class="send">
+						<input type="submit" value="提交" >
+					</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="footer">
+			<p class="footer-class">本网站最终解释权归HIT-图灵机所有</p>
+		</div>
+	</div>	
+</body>
+</html>

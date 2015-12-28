@@ -1,0 +1,160 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="/static/js/jquery.min.js"></script>
+<!-- Custom Theme files -->
+<!--theme-style-->
+<link href="/static/css/style.css" rel="stylesheet" type="text/css" media="all" />	
+<!--//theme-style-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--fonts-->
+<link href='http://fonts.useso.com/css?family=Lato:100,300,400,700,900' rel='stylesheet' type='text/css'>
+<!--//fonts-->
+<script type="text/javascript" src="/static/js/move-top.js"></script>
+<script type="text/javascript" src="/static/js/easing.js"></script>
+				<script type="text/javascript">
+					jQuery(document).ready(function($) {
+						$(".scroll").click(function(event){		
+							event.preventDefault();
+							$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+						});
+					});
+					</script>
+<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZEMf1poLHOZ3WyokvKXAGGs3"></script>
+<script src="/static/js/headimg.js" language="javascript"></script>
+</head>
+<body><center>
+
+	<!--header-->
+	<div class="container">
+	<div class="header">
+		<div class="header-top">
+			<div class="logo">
+				<a href="/home/"><img src="/static/images/logo.png" alt="" ></a>
+			</div>
+
+			
+			<div class="header-top-on">
+				{% if logined %}
+				<div class="head_img">
+					<a href="/information/change_img/"><img src = '/static/{{User.Img}}/' onload = "DrawImage(this)"></a>
+				</div>
+				<p>welcome,{{User.Username}}</p>
+				<p><a href='/loginout/'>退出登录</a></p>
+				{% else %}
+				<p><a href="/login/">登录</a>/<a href="/register/">注册</a></p>
+				{% endif %}
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+		<!---->
+		<div class="header-bottom">
+			<div class="top-nav">
+				<span class="menu"> </span>
+				<ul>
+					<li><a href="/home/" data-hover="首页">首页  </a> </li>
+					<li><a href="/guide/" data-hover="攻略" > 攻略</a></li>
+					<li><a href="/diary/" data-hover="日志"> 日志</a></li>
+					<li><a href="/team/"  data-hover="我的团队">我的团队 </a></li>
+					<li><a href="/information/" data-hover="个人资料">个人资料 </a></li>
+					<li><a href="/aim/" data-hover="旅游意向">旅游意向 </a></li>							</ul>
+				<!--script-->
+				<script>
+				$("span.menu").click(function(){
+					$(".top-nav ul").slideToggle(500, function(){
+					});
+				});
+				</script>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+	   </div>
+	</div>
+	</div>
+	<!---->
+	
+	
+	<div class="container"><center>
+		<div style="margin-bottom:40px; padding:10px">
+		   <form method = "POST">{% csrf_token %}	
+			<div class="search">
+					input：
+					<input type ='text' name = 'address' value="景点名称" onFocus="this.value = '';this.style.color='#000';" onBlur="if (this.value == '') {this.value = '景点名称';this.style.color='#aaa'}">
+					<input type="submit" value="">
+			</div>
+			</form>
+            <hr>
+            {% if flag %}
+            <h4>未搜索到地址，请完善搜索条件</h4>
+            {% else %}
+		</div>
+		<div style="width:1000px;height:600px;border:#ccc solid 1px;font-size:12px" id="map">
+		</div>
+		<script type="text/javascript">
+			//创建和初始化地图函数：
+			function initMap(){
+			  createMap();//创建地图
+			  setMapEvent();//设置地图事件
+			  addMapControl();//向地图添加控件
+			  addMapOverlay();//向地图添加覆盖物
+			}
+			function createMap(){ 
+			  map = new BMap.Map("map"); 
+			  map.centerAndZoom(new BMap.Point({{lng}},{{lat}}),15);
+			}
+			function setMapEvent(){
+			  map.enableScrollWheelZoom();
+			  map.enableKeyboard();
+			  map.enableDragging();
+			  map.enableDoubleClickZoom()
+			}
+			function addClickHandler(target,window){
+			  target.addEventListener("click",function(){
+				target.openInfoWindow(window);
+			  });
+			}
+			function addMapOverlay(){
+			  var markers = [
+				{content:"",title:'{{addre}}',imageOffset: {width:0,height:3},position:{lat:{{lat}},lng:{{lng}}}}
+			  ];
+			  for(var index = 0; index < markers.length; index++ ){
+				var point = new BMap.Point(markers[index].position.lng,markers[index].position.lat);
+				var marker = new BMap.Marker(point,{icon:new BMap.Icon("http://api.map.baidu.com/lbsapi/createmap/images/icon.png",new BMap.Size(20,25),{
+				  imageOffset: new BMap.Size(markers[index].imageOffset.width,markers[index].imageOffset.height)
+				})});
+				var label = new BMap.Label(markers[index].title,{offset: new BMap.Size(25,5)});
+				var opts = {
+				  width: 200,
+				  title: markers[index].title,
+				  enableMessage: false
+				};
+				var infoWindow = new BMap.InfoWindow(markers[index].content,opts);
+				marker.setLabel(label);
+				addClickHandler(marker,infoWindow);
+				map.addOverlay(marker);
+			  };
+			}
+			//向地图添加控件
+			function addMapControl(){
+			  var navControl = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
+			  map.addControl(navControl);
+			}
+			var map;
+			  initMap();
+		  </script>	
+		  {% endif %}
+		  <div style="padding:10px; margin-top:10px;">
+			<div class="footer"><center>
+				<p class="footer-class">本网站最终解释权归HIT-图灵机所有</p>
+			</center></div>
+		  </div>
+	</center></div>	
+    
+	
+</center></body>
+</html>
